@@ -1,6 +1,6 @@
-# 📝 Todo List - AWS Serverless avec Terraform
+# 📝 Todo List - AWS Serverless with Terraform
 
-Application de todo list moderne déployée sur AWS avec une architecture 100% serverless.
+Modern todo list application deployed on AWS with 100% serverless architecture.
 
 ## 🏗️ Architecture
 
@@ -14,213 +14,213 @@ Lambda Functions (Node.js)
 DynamoDB
 ```
 
-## 🛠️ Technologies utilisées
+## 🛠️ Technologies Used
 
-- **Terraform** : Infrastructure as Code
-- **AWS Lambda** : Fonctions serverless
-- **API Gateway** : REST API
-- **DynamoDB** : Base de données NoSQL
-- **S3** : Stockage des fichiers statiques
-- **CloudFront** : CDN pour la distribution globale
+- **Terraform**: Infrastructure as Code
+- **AWS Lambda**: Serverless functions
+- **API Gateway**: REST API
+- **DynamoDB**: NoSQL database
+- **S3**: Static file storage
+- **CloudFront**: CDN for global distribution
 
-## 📋 Prérequis
+## 📋 Prerequisites
 
-1. **Terraform** installé (version >= 1.0)
+1. **Terraform** installed (version >= 1.0)
    ```bash
-   # Vérifier l'installation
+   # Check installation
    terraform --version
    ```
 
-2. **AWS CLI** configuré avec tes credentials
+2. **AWS CLI** configured with your credentials
    ```bash
-   # Installer AWS CLI
+   # Install AWS CLI
    # https://aws.amazon.com/cli/
 
-   # Configurer les credentials
+   # Configure credentials
    aws configure
    ```
 
-3. **Compte AWS** avec les permissions nécessaires
+3. **AWS Account** with necessary permissions
 
-## 🚀 Déploiement
+## 🚀 Deployment
 
-### Étape 1 : Cloner/Préparer le projet
+### Step 1: Clone/Prepare the Project
 
 ```bash
 cd todo-app/terraform
 ```
 
-### Étape 2 : Initialiser Terraform
+### Step 2: Initialize Terraform
 
 ```bash
 terraform init
 ```
 
-Cette commande télécharge les providers AWS nécessaires.
+This command downloads the necessary AWS providers.
 
-### Étape 3 : Planifier le déploiement
+### Step 3: Plan the Deployment
 
 ```bash
 terraform plan
 ```
 
-Terraform affiche ce qui va être créé. Vérifie qu'il n'y a pas d'erreurs.
+Terraform displays what will be created. Check for any errors.
 
-### Étape 4 : Déployer l'infrastructure
+### Step 4: Deploy the Infrastructure
 
 ```bash
 terraform apply
 ```
 
-Tape `yes` pour confirmer. Le déploiement prend environ 5-10 minutes.
+Type `yes` to confirm. Deployment takes approximately 5-10 minutes.
 
-### Étape 5 : Récupérer l'URL de l'API
+### Step 5: Retrieve the API URL
 
-Après le déploiement, Terraform affiche les outputs :
+After deployment, Terraform displays the outputs:
 
 ```bash
 terraform output api_endpoint
 ```
 
-Tu verras quelque chose comme :
+You'll see something like:
 ```
 https://abc123xyz.execute-api.eu-west-1.amazonaws.com/dev
 ```
 
-### Étape 6 : Configurer le frontend
+### Step 6: Configure the Frontend
 
-1. Copie l'URL de l'API depuis l'output
-2. Ouvre `frontend/app.js`
-3. Remplace la ligne :
+1. Copy the API URL from the output
+2. Open `frontend/app.js`
+3. Replace the line:
    ```javascript
    const API_BASE_URL = 'https://YOUR_API_ID...';
    ```
-   Par ton URL réelle
+   With your actual URL
 
-### Étape 7 : Re-déployer avec la bonne URL
+### Step 7: Re-deploy with the Correct URL
 
 ```bash
 terraform apply
 ```
 
-Le frontend sera uploadé vers S3 avec la bonne configuration.
+The frontend will be uploaded to S3 with the correct configuration.
 
-### Étape 8 : Accéder à l'application
+### Step 8: Access the Application
 
-Récupère l'URL CloudFront :
+Retrieve the CloudFront URL:
 
 ```bash
 terraform output cloudfront_domain
 ```
 
-Ouvre cette URL dans ton navigateur !
+Open this URL in your browser!
 
-## 📊 Outputs disponibles
+## 📊 Available Outputs
 
 ```bash
-# URL de l'API Gateway
+# API Gateway URL
 terraform output api_endpoint
 
-# Nom de la table DynamoDB
+# DynamoDB table name
 terraform output dynamodb_table_name
 
-# Nom du bucket S3
+# S3 bucket name
 terraform output s3_bucket_name
 
-# URL CloudFront
+# CloudFront URL
 terraform output cloudfront_domain
 ```
 
-## 🧪 Tester l'API manuellement
+## 🧪 Test the API Manually
 
-### GET tous les todos
+### GET all todos
 ```bash
 curl https://YOUR_API_URL/dev/todos
 ```
 
-### POST créer un todo
+### POST create a todo
 ```bash
 curl -X POST https://YOUR_API_URL/dev/todos \
   -H "Content-Type: application/json" \
-  -d '{"title": "Mon premier todo"}'
+  -d '{"title": "My first todo"}'
 ```
 
-### PUT mettre à jour un todo
+### PUT update a todo
 ```bash
 curl -X PUT https://YOUR_API_URL/dev/todos/TODO_ID \
   -H "Content-Type: application/json" \
   -d '{"completed": true}'
 ```
 
-### DELETE supprimer un todo
+### DELETE remove a todo
 ```bash
 curl -X DELETE https://YOUR_API_URL/dev/todos/TODO_ID
 ```
 
-## 🗑️ Détruire l'infrastructure
+## 🗑️ Destroy the Infrastructure
 
-⚠️ **Attention** : Cette commande supprime TOUT (données incluses).
+⚠️ **Warning**: This command deletes EVERYTHING (including data).
 
 ```bash
 cd terraform
 terraform destroy
 ```
 
-Tape `yes` pour confirmer.
+Type `yes` to confirm.
 
-## 💰 Coûts
+## 💰 Costs
 
-Avec le **AWS Free Tier**, cette application est **gratuite** pendant 12 mois :
+With **AWS Free Tier**, this application is **free** for 12 months:
 
-- **Lambda** : 1M requêtes/mois gratuit
-- **DynamoDB** : 25 GB stockage + 25 WCU/RCU gratuit
-- **API Gateway** : 1M requêtes/mois gratuit
-- **S3** : 5 GB stockage gratuit
-- **CloudFront** : 50 GB transfert gratuit
+- **Lambda**: 1M requests/month free
+- **DynamoDB**: 25 GB storage + 25 WCU/RCU free
+- **API Gateway**: 1M requests/month free
+- **S3**: 5 GB storage free
+- **CloudFront**: 50 GB transfer free
 
-Au-delà du free tier, les coûts sont très faibles (quelques centimes par jour).
+Beyond the free tier, costs are very low (a few cents per day).
 
-## 🐛 Dépannage
+## 🐛 Troubleshooting
 
-### Erreur : "bucket already exists"
+### Error: "bucket already exists"
 
-Les noms de buckets S3 sont globalement uniques. Le suffixe aléatoire devrait éviter ça, mais si ça arrive :
+S3 bucket names are globally unique. The random suffix should prevent this, but if it happens:
 
-1. Change `random_string.bucket_suffix.length` dans `s3-cloudfront.tf`
+1. Change `random_string.bucket_suffix.length` in `s3-cloudfront.tf`
 2. Re-run `terraform apply`
 
-### Erreur CORS dans le navigateur
+### CORS Error in Browser
 
-Vérifie que les headers CORS sont bien configurés dans les Lambda et API Gateway.
+Verify that CORS headers are properly configured in Lambda and API Gateway.
 
-### Lambda timeout
+### Lambda Timeout
 
-Si une fonction Lambda timeout (> 10s), augmente le `timeout` dans `lambda.tf`.
+If a Lambda function times out (> 10s), increase the `timeout` in `lambda.tf`.
 
-### Logs CloudWatch
+### CloudWatch Logs
 
-Consulte les logs dans la console AWS :
+Check logs in the AWS console:
 - CloudWatch > Log Groups > `/aws/lambda/todo-app-*`
 
-## 📚 Ressources
+## 📚 Resources
 
-- [Documentation Terraform AWS](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
+- [Terraform AWS Documentation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
 - [AWS Lambda Developer Guide](https://docs.aws.amazon.com/lambda/)
 - [API Gateway Documentation](https://docs.aws.amazon.com/apigateway/)
 - [DynamoDB Developer Guide](https://docs.aws.amazon.com/dynamodb/)
 
-## 🎓 Prochaines étapes
+## 🎓 Next Steps
 
-Pour aller plus loin :
+To go further:
 
-1. **Authentification** : Ajouter Cognito pour gérer les utilisateurs
-2. **CI/CD** : Automatiser le déploiement avec GitHub Actions
-3. **Monitoring** : Ajouter des alarmes CloudWatch
-4. **Tests** : Écrire des tests unitaires pour les Lambda
-5. **Multi-environnements** : Dev, staging, prod avec Terraform workspaces
-6. **Custom domain** : Utiliser Route53 pour un nom de domaine personnalisé
-7. **Optimisation** : Ajouter du caching avec ElastiCache
+1. **Authentication**: Add Cognito to manage users
+2. **CI/CD**: Automate deployment with GitHub Actions
+3. **Monitoring**: Add CloudWatch alarms
+4. **Testing**: Write unit tests for Lambda functions
+5. **Multi-environments**: Dev, staging, prod with Terraform workspaces
+6. **Custom domain**: Use Route53 for a custom domain name
+7. **Optimization**: Add caching with ElastiCache
 
-## 📝 Licence
+## 📝 License
 
-Projet éducatif - Utilisation libre
+Educational project - Free to use
