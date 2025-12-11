@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List - AWS Serverless</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Ma Todo List</h1>
+        </header>
+
+        <main>
+            <!-- Formulaire d'ajout -->
+            <div class="add-todo-section">
+                <input 
+                    type="text" 
+                    id="todoInput" 
+                    placeholder="Ajouter une nouvelle tâche..." 
+                    maxlength="200"
+                />
+                <button id="addBtn" class="btn btn-primary">
+                    Ajouter
+                </button>
+            </div>
+
+            <!-- Statistiques -->
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="totalCount">0</span>
+                    <span class="stat-label">Total</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="activeCount">0</span>
+                    <span class="stat-label">En cours</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="completedCount">0</span>
+                    <span class="stat-label">Terminées</span>
+                </div>
+            </div>
+
+            <!-- Message de chargement -->
+            <div id="loading" class="loading">
+                Chargement des todos...
+            </div>
+
+            <!-- Message d'erreur -->
+            <div id="error" class="error" style="display: none;">
+                <strong>Erreur:</strong> <span id="errorMessage"></span>
+            </div>
+
+            <!-- Liste des todos -->
+            <div id="todoList" class="todo-list">
+                <!-- Les todos seront injectés ici par JavaScript -->
+            </div>
+
+            <!-- Message quand la liste est vide -->
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <p>🎉 Aucune tâche ! Profitez de votre journée.</p>
+            </div>
+        </main>
+
+        <footer>
+            <p>
+                Déployé avec 
+                <span class="tech-badge">Terraform</span>
+                <span class="tech-badge">Lambda</span>
+                <span class="tech-badge">API Gateway</span>
+                <span class="tech-badge">DynamoDB</span>
+                <span class="tech-badge">S3</span>
+                <span class="tech-badge">CloudFront</span>
+            </p>
+        </footer>
+    </div>
+
+    <script src="app.js?v=2"></script>
+</body>
+</html>
